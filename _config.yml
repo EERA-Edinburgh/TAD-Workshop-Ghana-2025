@@ -1,45 +1,67 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# Site configuration
+# 1. Files excluded from Jekyll builds
+# 2. Installed Gems
+# 3. Gem settings
+# 4. Jekyll settings
+# 5. Collections
+# 6. Jekyll collections settings
+# 7. Site settings
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: Hitchens
-email: hello@patdryburgh.com
-description: >- # this means to ignore newlines until "baseurl:"
-  An inarguably well-designed Jekyll theme.
-baseurl: "/hitchens" # the subpath of your site, e.g. /blog
-url: "https://patdryburgh.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-icon: /assets/images/icon-512.png
-twitter_username: patdryburgh
-github_username:  patdryburgh
+# 1. Files excluded from Jekyll builds
+exclude:
+- README.md
+- CODE_OF_CONDUCT.md
+- CONTRIBUTING.md
+- screenshot.png
+- LICENSE
+- CNAME
+- Gemfile
+- Gemfile.lock
+- garth-jekyll-theme.gemspec
 
-# Build settings
-markdown: kramdown
-
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
-
+# 2. Installed Gems
 plugins:
-  - jekyll-paginate
+- jekyll-paginate
 
-paginate: 3
-paginate_path: "/page/:num/"
+# 3. Gem settings
+paginate: 2 # jekyll-paginate > items per page
+paginate_path: page:num # jekyll-paginate > blog page
+
+# 4. Jekyll settings
+sass:
+  style: compressed # Style compression
+permalink: pretty  # Permalink style (/YYYY/MM/DD/page-name/)
+excerpt_separator: <!-- more --> # Marks end of excerpt in posts
+timezone: Europe/London # Timezone for blog posts and alike
+
+# 5. Collections
+collections:
+  posts:
+    title: Blog # Needed for Siteleaf
+    output: true
+    description: "This is merely a demo, find out more [about Garth](about)" # The post list page content
+
+# 6. Jekyll collections settings
+defaults:
+  -
+    scope:
+      path: ""
+      type: pages
+    values:
+      layout: page # Default layout
+  -
+    scope:
+      path: ""
+      type: posts
+    values:
+      layout: post # Default layout
+
+# 7. Site settings
+encoding: utf-8 # Make sure the encoding is right
+title: "Garth" # Site name or title
+logo: "/assets/logo.svg" # Site logo
+# favicon: "/favicon.ico" # Uncomment to add custom favicon, or leave as is to use site logo
+description: "A really basic theme for Jekyll, using the official Jekyll theme implementation" # Site description and default description
+url: "https://garth.darn.es" # Site url
+baseurl: ""
+lang: en-GB

@@ -1,196 +1,80 @@
----
-layout: page
-title: "Hitchens"
----
+# [Garth](https://garth.darn.es/)
+[![Gem Version](https://badge.fury.io/rb/garth-jekyll-theme.svg)](https://badge.fury.io/rb/garth-jekyll-theme)
 
-An inarguably well-designed [Jekyll](http://jekyllrb.com) theme by [Pat Dryburgh](https://patdryburgh.com).
+🥁 A really basic theme for Jekyll, using the official Jekyll theme implementation.
 
-![Hitchens Preview](https://raw.githubusercontent.com/patdryburgh/hitchens/master/screenshot.png)
+[<img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" width="217"/>](https://buymeacoffee.com/daviddarnes#support)
 
-Undoubtably one of the great minds of our time, [Christopher Hitchens](https://en.wikipedia.org/wiki/Christopher_Hitchens) challenged his readers to think deeply on topics of politics, religion, war, and science. This Jekyll theme's design is inspired by the trade paperback version his book, [Arguably](https://en.wikipedia.org/wiki/Arguably), and is dedicated to his memory.
+![Screenshot](https://raw.githubusercontent.com/daviddarnes/garth/master/screenshot.png)
 
-## Quick Start
+## Contents
+- [Installation](#installation)
+- [Customising](#customising)
+- [Site settings](#site-settings)
+- [Page layouts](#page-layouts)
+- [Credits](#credits)
 
-This theme is, itself, a Jekyll blog, meaning the code base you see has everything you need to run a Jekyll powered blog!
+## Installation
 
-To get started quickly, follow the instructions below:
+### Quick setup
 
-1. Click the `Fork` button at the top of [the repository](https://github.com/patdryburgh/hitchens/);
-2. Go to your forked repo's `Settings` screen;
-3. Scroll down to the `GitHub Pages` section;
-4. Under `Source`, select the `Master` branch;
-5. Hit `Save`.
-6. Follow [Jekyll's instructions to configure your new Jekyll site](https://jekyllrb.com/docs/configuration/).
+To give you a running start I've put together some starter kits that you can download, fork or even deploy immediately:
 
-## Manual Installation
+- Vanilla Jekyll starter kit:  
+  [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/daviddarnes/garth-kit)
+- Stackbit starter kit:  
+  [![Create with Stackbit](https://assets.stackbit.com/badge/create-with-stackbit.svg)](https://app.stackbit.com/create?theme=https://github.com/daviddarnes/garth-stackbit-kit)
+- GitHub Pages with remote theme kit - **[Download kit](https://github.com/daviddarnes/garth-kit/archive/remote-theme.zip)**
 
-If you've already created your Jekyll site or are comfortable with the command line, you can follow [Jekyll's Quickstart instructions](https://jekyllrb.com/docs/) add this line to your Jekyll site's `Gemfile`:
+### As a Jekyll theme
 
-```ruby
-gem "hitchens-theme"
-```
+1. Add `gem "garth-jekyll-theme"` to your `Gemfile` to add the theme as a dependancy
+2. Run the command `bundle install` in the root of project to install the theme and its dependancies
+3. Add `theme: garth-jekyll-theme` to your `_config.yml` file to set the site theme
+4. Run `bundle exec jekyll serve` to build and serve your site
+5. Done! Use the example [`_config.yml`](https://github.com/daviddarnes/garth/blob/master/_config.yml) file to set site-wide options
 
-And add the following lines to your Jekyll site's `_config.yml`:
+### As a GitHub Pages remote theme
 
-```yaml
-theme: hitchens-theme
-```
+1. Add `gem "jekyll-remote-theme"` to your `Gemfile` to add the theme as a dependancy
+2. Run the command `bundle install` in the root of project to install the jekyll remote theme gem as a dependancy
+3. Add `jekyll-remote-theme` to the list of `plugins` in your `_config.yml` file
+4. Add `remote_theme: daviddarnes/garth` to your `_config.yml` file to set the site theme
+5. Run `bundle exec jekyll serve` to build and serve your site
+6. Done! Use the example [`_config.yml`](https://github.com/daviddarnes/garth/blob/master/_config.yml) file to set site-wide options
 
-Depending on your [site's configuration](https://jekyllrb.com/docs/configuration/options/), you may also need to add:
+### As a Boilerplate / Fork
 
-```yaml
-ignore_theme_config: true
-```
+_(deprecated, not recommended)_
 
-And then on the command line, execute:
+1. [Fork the repo](https://github.com/daviddarnes/garth#fork-destination-box)
+2. Replace the `Gemfile` with one stating all the gems used in your project
+3. Delete the following unnecessary files/folders: `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `LICENSE`, `screenshot.png`, `CNAME` and `garth-jekyll-theme.gemspec`
+4. Run the command `bundle install` in the root of project to install the jekyll remote theme gem as a dependancy
+5. Run `bundle exec jekyll serve` to build and serve your site
+6. Done! Use the example [`_config.yml`](https://github.com/daviddarnes/garth/blob/master/_config.yml) file to set site-wide options
 
-    $ bundle
+## Customising
 
-Or install the theme yourself as:
+When using Garth as a theme means you can take advantage of the file overriding method. This allows you to overwrite any file in this theme with your own custom file, by matching the file name and path. The most common example of this would be if you want to add your own styles or change the core style settings.
 
-    $ gem install hitchens-theme
+To add your own styles copy the [`styles.scss`](https://github.com/daviddarnes/garth/blob/master/assets/styles.scss) into your own project with the same file path (`assets/styles.scss`). From there you can add your own styles, you can even optionally ignore the theme styles by removing the `@import "garth";` line.
 
-## Usage
+If you're looking to set your own colours copy the [`_colors.scss`](https://github.com/daviddarnes/garth/blob/master/_sass/_colors.scss) and main theme styles file [`garth.scss`](https://github.com/daviddarnes/garth/blob/master/_sass/garth.scss) into your project at the same file path (`_sass/`) and change variables however you wish. The settings are a mixture of custom variables and settings from [Sassline](https://medium.com/@jakegiltsoff/sassline-v2-0-e424b2881e7e) - follow the link to find out how to configure the typographic settings.
 
-### Home Layout
+## Site settings
 
-The `home` layout presents a list of articles ordered chronologically. The theme uses [Jekyll's built-in pagination](https://jekyllrb.com/docs/pagination/#enable-pagination) which can be configured in your `_config.yml` file.
+You'll need to change the `description`, `title` and `url` to match with the project.
 
-The masthead of the home page is derived from the `title` and `description` set in your site's `_config.yml` file.
+## Page layouts
 
-#### Navigation
+There are 3 layouts; `page`, `post` and `home` (home acts as the font page blog).
 
-To include a navigation menu in your site's masthead and footer:
+> **Note:** The Post List Page options are actually in the collection data within the `_config.yml` file, this is so they can be edited with CMSs such as [Siteleaf](https://siteleaf.com)
 
-1. Create a `_data` directory in the root of your site.
-2. Add a `menu.yml` file to the `_data` directory.
-3. Use the following format to list your menu items:
+## Credits
 
-```
-- title: About
-  url: /about.html
-
-- title: Source
-  url: https://github.com/patdryburgh/hitchens
-```
-
-Be sure to start your `url`s with a `/`.
-
-#### Pagination
-
-To paginate your posts, add the following line to your site's `Gemfile`:
-
-```
-gem "jekyll-paginate"
-```
-
-Then, add the following lines to your site's `_config.yml` file:
-
-```
-plugins:
-  - jekyll-paginate
-
-paginate: 20
-paginate_path: "/page/:num/"
-```
-
-You can set the `paginate` and `paginate_path` settings to whatever best suits you.
-
-#### Excerpts
-
-To show [excerpts](https://jekyllrb.com/docs/posts/#post-excerpts) of your blog posts on the home page, add the following settings to your site's `_config.yml` file:
-
-```
-show_excerpts: true
-```
-
-By default, excerpts that have more than 140 characters will be truncated to 20 words. In order to override the number of words you'd like to show for your excerpts, add the following setting to your site's `_config.yml` file:
-
-```
-excerpt_length: 20
-```
-
-To disable excerpt truncation entirely, simply set `excerpt_length` to `0` in your site's `_config.yml` file, like so:
-
-```
-excerpt_length: 0
-```
-
-If you do this, the theme will still respect Jekyll's `excerpt_separator` feature as [described in the Jekyll documentation](https://jekyllrb.com/docs/posts/#post-excerpts).
-
-
-#### Title-less Posts
-
-If you want to publish posts that don't have a title, add the following setting to the [front matter](https://jekyllrb.com/docs/frontmatter/) of the post:
-
-```
-title: ""
-```
-
-When you do this, the home page will display a truncated [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) of the first paragraph of your post.
-
-Note that setting `excerpt_length` in your site's `_config.yml` file will set the length of _all_ excerpts, regardless of whether the post has a title or not. For posts with a title, the excerpt will appear under the title and slightly lighter. For title-less posts, the excerpt will appear as if it were a title.
-
-### Post Layout
-
-A sparsely decorated layout designed to present long-form writing in a manner that's pleasing to read.
-
-To use the post layout, add the following to your post's [front matter](https://jekyllrb.com/docs/frontmatter/):
-
-```
-layout: post
-```
-
-### Icons
-
-The [JSON Feed spec](https://jsonfeed.org/version/1) states that feeds should include an icon. To add your icon, add the following line in your site's `_config.yml` file:
-
-```
-feed_icon: /assets/images/icon-512.png
-```
-
-Then, replace the `/assets/images/icon-512.png` file with your own image.
-
-### Credits
-
-The theme credits that appear at the bottom of each page can be turned off by including the following line in your site's `_config.yml` file:
-
-```
-hide_credits: true
-```
-
-### Search
-
-The theme uses a [custom DuckDuckGo Search Form](https://ddg.patdryburgh.com) that can be turned off by including the following line in your site's `_config.yml` file: 
-
-```
-hide_search: true
-```
-
-### Font
-
-I spent a good amount of time trying to identify the font used on the front cover of the trade paperback version of Arguably. Unfortunately, I failed to accurately identify the exact font used. If you happen to know what font is used on the book cover, I would appreciate you [letting me know](mailto:hello@patdryburgh.com) :)
-
-The theme includes a version of [EB Garamond](https://fonts.google.com/specimen/EB+Garamond), designed by Georg Duffner and Octavio Pardo. It's the closest alternative I could come up with that included an open license to include with the theme.
-
-A [copy of the license](https://github.com/patdryburgh/hitchens/blob/master/assets/fonts/OFL.txt) has been included in the `assets` folder and must be included with any distributions of this theme that include the EB Garamond font files.
-
-## Contributing & Requesting Features
-
-Bug reports, feature requests, and pull requests are welcome on GitHub at [https://github.com/patdryburgh/hitchens](https://github.com/patdryburgh/hitchens).
-
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## Development
-
-To set up your environment to develop this theme, run `bundle install`.
-
-The theme is setup just like a normal Jekyll site. To test the theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using the theme. Add pages, documents, data, etc. like normal to test the theme's contents. As you make modifications to the theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
-
-## License
-
-The code for this theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-The font, EB Garamond, is Copyright 2017 The EB Garamond Project Authors and licensed under the [SIL Open Font License Version 1.1](https://github.com/patdryburgh/hitchens/blob/master/assets/fonts/OFL.txt).
-
-Graphics are released to the public domain.
+- Thanks to [Sassline](https://sassline.com/) for the typographic basis, by [Jake Giltsoff](https://twitter.com/jakegiltsoff)
+- Thanks to [Flexbox mixin](https://github.com/mastastealth/sass-flex-mixin) by [Brian Franco](https://twitter.com/brianfranco)
+- Thanks to [Normalize](https://necolas.github.io/normalize.css/) by [Nicolas Gallagher](https://twitter.com/necolas) and [Jonathan Neal](https://twitter.com/jon_neal).
+- Thanks to [pygments-css](http://richleland.github.io/pygments-css/) for the autumn syntax highlighting, by [Rich Leland](https://twitter.com/richleland)
