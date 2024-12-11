@@ -1,0 +1,59 @@
+#- name:
+#  photo: rock.jpg
+#  info:
+#  email:
+#  number_educ:
+#  education1:
+#  education2:
+#  education3:
+#  education4:
+
+- name: Carys Redman-White
+  photo: carysredmanwhite.jpg
+  info: PhD Student (Co-Supervised)
+  bio: Carys is using interdisciplinary data- and modelling-focused methods to investigate antimicrobial use (AMU) and resistance (AMR) at the livestock-human interface in sub-Saharan Africa, working with SEBI-Livestock and the Global Academy of Agriculture and Food Security. She is exploring the AMU/AMR landscape from a One Health systems perspective and investigating how existing data covering a range of biological, socioeconomic, and environmental factors can be mobilised to fill knowledge gaps in resource-poor locations where direct surveillance of antimicrobials is challenging. Carys is studying with the EASTBIO Doctoral Training Partnership and is supervised in her PhD by Professor Dominic Moran, Professor Andy Peters, and Dr Adrian Muwonge. She can be found on Twitter as <a href="https://twitter.com/BioCarys">@BioCarys</a> and is a co-host of the Edinburgh University AMR Forum Podcast, in which she is sometimes joined by her cat, Khoshekh.
+  email: 
+  number_educ: 3
+  education1: MRes Epidemiology, Newcastle University
+  education2: VetMB Veterinary Medicine, University of Cambridge
+  education3: MA Natural Sciences (Zoology), University of Cambridge
+
+- name: Timothy Lee
+  photo: scientist.png
+  info: PhD Student (Co-Supervised)  
+  bio: My PhD examines <i>Staphylococcus aureus</i> isolates obtained from communities in Uganda for antimicrobial resistance, as well as survey data on antibiotic use and prescription across animals and humans to explain antimicrobial resistance emergence. I also have some background in biomedical ethics, and am interested in exploring the bioethical dimensions of data collection for surveillance and tracking of AMR.
+  email: 
+  number_educ: 3
+  education1: MSc Biotechnology, University of Melbourne
+  education2: HBSc Molecular Biology and Biotechnology, University of Toronto
+  education3: Twitter <a href="https://twitter.com/TimNicholasLee">@TimNicholasLee</a>
+
+- name: Monica Mbabazi
+  photo: MonicaM.jpeg
+  info: PhD Student (Co-Supervised)
+  bio: I completed my MSc in Immunology and Clinical Microbiology at Makerere University under the supervision of Dr. Adrian Muwonge and Dr. David Patrick Kateete. Following the master’s degree, I undertook a pre-doctoral mentorship in Bioinformatics and Computational Biology at Makerere University in collaboration with the University of Georgia.<br><br>Currently, I am pursuing a PhD in Bioinformatics and my research interest is exploring the role of host microbiota in fighting infectious diseases. My PhD research project is entitled “Unraveling the Role of Gut and Lung Microbiota in Pulmonary Tuberculosis” under the supervision of Dr. Adrian Muwonge.
+  email: 
+  number_educ: 4
+  education1: MSc in Immunology and Clinical Microbiology, Makerere University
+  education2: Predoctoral mentorship in Bioinformatics and Computational Biology, Makerere University and University of Georgia
+  education3: <a href="https://github.com/MonicaMbabazi">Github</a>
+  education4: <a href="https://www.linkedin.com/in/monica-mbabazi-3b8244144/">LinkedIn</a>
+
+
+- name: Vesa Qarkaxhija
+  photo: scientist.png
+  info: PhD Student (Co-Supervised)
+  bio: My PhD focuses on bacterial and AMR transmission within agricultural supply chains in Malawi in collaboration with the Fleming Fund there. I will apply a one health approach using genomics to identify transmission vertically through the supply chain and horizontally across humans, animals and the environment, alongside machine learning to assess zoonotic risk of strains. Additionally, investigating accessibility to antibiotics as a determinant of AMR prevalence found using spatial mapping. Previous to this, I worked in developing infectious disease vaccines in an Oxford Biotech.
+  email: 
+  number_educ: 2
+  education1: MSc Genetics and Molecular Medicine, University of Edinburgh
+  education2: BSc Biochemistry, University of Portsmouth
+
+- name: Frank Chilanga
+  photo: FrankChilanga.png
+  info: PhD Student
+  bio: Frank is an infectious diseases epidemiologist, having earned his Master of Preventive Veterinary Medicine from the University of California, Davis. He also earned BSc and MSc in Animal Science degrees from the Lilongwe University of Agriculture and Natural Resources in Malawi. His previous research focused on sustainable intensification of livestock production in Malawi, the epidemiology of antimicrobial resistance in the Malawian poultry sector, and the inter-epidemic epidemiology of Rift valley fever at the human-livestock interface in southcentral Tanzania. In his current doctoral studies, Frank is dedicated to investigating the complexities of AMR transmission dynamics in Uganda at the interface of farmers and their livestock under the supervision of Dr Adrian Muwonge, Dr Stella Mazeri, and Dr Gavin Paterson.
+  number_educ: 3
+  education1: Master of Preventive Veterinary Medicine, University of California Davis
+  education2: Master of Science in Animal Science, Lilongwe University of Agriculture and Natural Resources
+  education3: Bachelor of Science in Animal Science, Lilongwe University of Agriculture and Natural Resources
