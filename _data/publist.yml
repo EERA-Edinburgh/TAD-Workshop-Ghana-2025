@@ -1,0 +1,60 @@
+
+- title: "The epidemiology of antibiotic-resistant clinical pathogens in Uganda"
+  image: ugandaamrepi.jpg
+  description: Antibiotic resistance in Uganda is increasing by 0.5% annually, particularly in bloodstream and surgical wound infections, with notable age, gender, and regional differences.
+  authors: R Namusoosa, I Mugerwa, KI Kasozi, A Muruta, G Najjuka, WD Atuhaire, S Nabadda, H Mwebesa, C Olaro, I Ssewanyana, A Ssemaganda, A Muwonge
+  link:
+    url: https://doi.org/10.7189/jogh.14.04184
+    display: 10.7189/jogh.14.04184
+  highlight: 1
+
+- title: "Exploring drivers of self-treatment with antibiotics in three agricultural communities of northern Tanzania"
+  image: loosli2024.jpg
+  description: Self-treatment with antibiotics is widespread in northern Tanzania, driven by limited healthcare access, stockouts, and reliance on informal networks, highlighting the need for improved healthcare services, antibiotic accessibility, and retail vendor training to combat antimicrobial resistance.
+  authors: K Loosli, F Nasuwa, M Melubo, K Mnzava, L Matthews, SE Mshana, BT Mmbaga, A Muwonge, A Davis, T Lembo
+  link:
+    url: https://doi.org/10.1186/s13756-024-01453-x
+    display: 10.1186/s13756-024-01453-x
+  highlight: 1
+
+- title: "A Digital One Health framework to integrate data for public health decision-making"
+  image: trafficlight.png
+  description: Proposing a Digital One Health (DOH) framework for integrating data in public health decision-making.
+  authors: CJ Redman-White, K Loosli, V Qarkaxhija, TN Lee, G Mboowa, BA Wee, A Muwonge
+  link:
+    url: https://doi.org/10.1016/j.ijidoh.2023.100012
+    display: 10.1016/j.ijidoh.2023.100012
+  highlight: 1
+
+
+
+- title: "A review of the predictors of antimicrobial use and resistance in European food animal production"
+  image: pigproduction.png
+  description: Paper reviewing predictors of AMU and AMR in European livestock
+  authors: CJ Redman-White, D Moran, AR Peters, A Muwonge
+  link:
+    url: https://doi.org/10.3389/frabi.2023.1209552
+    display: 10.3389/frabi.2023.1209552
+  highlight: 1
+
+- title: "An open-source digital contact tracing system tailored to haulage"
+  image: theags.jpg
+  description: Paper descibing THEA-GS, an open-source digital contact tracing system for the Global South tailored to haulage
+  authors: A Muwonge, BA Wee, I Mugerwa, E Nabunya, CM Mpyangu, BM de C Bronsvoort, ER Ssebaggala, A Kiayias, E Mwaka, M Joloba
+  link:
+    url: https://doi.org/10.3389/fdgth.2023.1199635
+    display: 10.3389/fdgth.2023.1199635
+  highlight: 0
+
+
+- title: "Developing digital contact tracing tailored to haulage in East Africa to support COVID-19 surveillance: a protocol"
+  image: projectTHEA.png
+  description: Paper descibing THEA-C19
+  authors: A Muwonge, CM Mpyangu, A Nsangi, I Mugerwa, BM Brunsvoort, T Porphyre, ER Ssebaggala, A Kiayias, ES Mwaka, M Joloba
+  link:
+    url: https://bmjopen.bmj.com/content/12/9/e058457
+    display: 10.1136/bmjopen-2021-058457
+  highlight: 0
+
+
+

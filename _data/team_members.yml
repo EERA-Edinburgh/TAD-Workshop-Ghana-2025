@@ -1,0 +1,21 @@
+- name: <b>Principal Investigator</b><br>Dr Adrian Muwonge
+  photo: adrianmuwonge.jpg
+  info: Chancellor's Fellow in Digital One Health
+  bio: I am a molecular epidemiologist with ten years of research experience at the African human-animal interface. As a University of Edinburgh Chancellor’s Fellow, my research currently focuses on integrating one health data streams to inform public health strategies. Beyond the biological signals of the data, I examine how such data becomes a shared resource without violating ethical, legal and social boundaries. This has informed conversation around a concept we now call “Digital One Health”. I am specifically examining this concept in line with how countries use one health to deliver antimicrobial resistance (AMR) National Action Plans (NAPs). One Health is primarily viewed as how people in sectors collaborate but less as how the data streams integrate. This work builds on Fleming Fund AMR capacity-building activities I co-lead in Uganda, Kenya and Malawi. These all build on fundamental research I have done examining the livestock production system drivers of AMR at the human-animal interface in Uganda. The Roslin Institute is a world-leading bioscience facility that has supported my ambition to deliver scientific evidence, policy and capacity building for the human-animal interface. I have also recently partnered with the School of Informatics to bring digital tools to this interface.
+  number_educ: 3
+  education1: Doctor of Philosophy (PhD), Norwegian University of Life Science
+  education2: Master of Public Health, Norwegian University of Life Science
+  education3: Bachelors in Veterinary Medicine & Surgery, Makerere University
+
+- name: Dr Bryan Wee
+  photo: bryanwee.jpg
+  info: Core Scientist 
+  bio: Bryan’s research uses genome and metagenome sequencing to answer a range of evolutionary questions about bacterial pathogens. He has worked on bacterial pathogens from all facets of the One Health continuum, including both human and animal pathogens, as well as environmental bacteria and viruses.
+  number_educ: 6
+  education1: Doctor of Philosophy (PhD), University of Queensland
+  education2: Master of Molecular Biology, University of Queensland
+  education3: Bachelor of Science, Universiti Kebangsaan Malaysia
+  education4: Personal website <a href="https://bawee.github.io">bawee.github.io</a>
+  education5: Connect on <a href="https://www.linkedin.com/in/bawee">LinkedIn</a>
+  education6: Publications on <a href="https://scholar.google.com/citations?hl=en&user=Ua8vr-QAAAAJ&view_op=list_works&sortby=pubdate">Google Scholar</a>
+

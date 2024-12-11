@@ -1,0 +1,33 @@
+---
+title: Leaflet
+leafletmap: true
+always_allow_html: yes
+last_modified_at: 2023-03-16
+output:
+ github_document:
+  html_preview: false
+---
+
+
+```{r}
+
+library(leaflet)
+
+
+data = read.csv("/Users/bwee/Library/CloudStorage/OneDrive-UniversityofEdinburgh/Documents/Muwonge_Lab/docs/github/digital-one-health.github.io/leaflet/network.csv", header = TRUE)
+
+greenLeafIcon <- makeIcon(
+  iconUrl = "https://www.ed.ac.uk/sites/all/themes/uoe/assets/logo.png",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94)
+addMarkers(~long, ~lat, label = "The Roslin Institute, University of Edinburgh", icon = greenLeafIcon)
+
+m <- leaflet(data) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(~long, ~lat, popup = ~as.character(label)) %>% 
+  addMarkers(~long, ~lat, label = "The Roslin Institute, University of Edinburgh", icon = greenLeafIcon)
+
+
+
+m
+```
