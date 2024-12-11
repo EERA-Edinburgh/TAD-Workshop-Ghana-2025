@@ -23,10 +23,6 @@ what3words:           # optional: what3words (https://what3words.com) address of
 
 {% comment %} See instructions in the comments below for how to edit specific sections of this workshop template. {% endcomment %}
 
-# FMD-Ghana-2025
-Repo for the UK-Ghana FMD Sequencing and Data Science Workshop 2025
-
-
 {% comment %}
 HEADER
 
