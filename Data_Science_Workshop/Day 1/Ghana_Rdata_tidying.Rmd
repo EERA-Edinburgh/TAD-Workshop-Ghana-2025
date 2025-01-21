@@ -1,0 +1,400 @@
+---
+title: "R tidying data and Exploratory Data Analysis"
+subtitle: "Ghana Data Science Workshop TADs"
+author: "EPIDEMIOLOGY, ECONOMICS AND RISK ASSESSMENT (EERA)"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r, echo = FALSE, }
+knitr::opts_chunk$set(fig.width=6, fig.height=5, message = FALSE, warning = FALSE)
+```
+
+## Tidy data
+
+Hopefully if we've entered our own data into something like Excel we can make sure the data are well organised and tidy. By tidy we mean...
+
+1. Each observation is in its own row
+2. Each variable is in its own column
+
+Additionally we would like the column names to work well with our statistics software (no crazy symbols or spaces) and to have consistent data in the columns (dates in a standard format etc.)
+
+Here we will use the untidy version of the wedding dataset, **weddingdata_2018b_untidy.xlsx**, to demonstrate some of these principles and how you can use R to tidy a dataset in preparation for analysis. This is made up data from an outbreak investigation at a wedding dinner. 
+
+First load the `tidyverse` set of packages (it includes data tidying functions), the `readxl` package (we'll use it to import the data) and other useful packages.
+
+
+```{r, eval = TRUE}
+library(tidyverse)
+library(readxl)
+library(here)
+library(lubridate)
+library(writexl)
+library(forcats)
+library(janitor)
+```
+
+Before you can work on the data you'll need to import it. 
+
+```{r, echo=TRUE, eval=TRUE}
+wedd <- read_excel(here("data", "weddingdata_2018b_untidy.xlsx"))
+```
+
+You can have a look at the data by either typing ```wedd``` in the console to see a small snapshot in the console or by clicking on the ```wedd``` object name in the environment tab (top right of your screen).
+
+The idea is that every time you have a new dataset you need to first check to make sure there are no obvious errors and that it is in a tidy format to make it more straight forward to analyse. 
+
+Let's start with the column names.. 
+
+### Renaming columns
+
+In order to see all the column names type...
+
+```{r}
+names(wedd)
+```
+
+Here we notice that some column names are a bit too long, include spaces and 'special characters'. We really like only letters, numbers and '_' in column names as they work well with the R software.
+
+We can edit the odd column names using the ```rename``` function. The following code takes the ```wedd``` dataset, ___then___ pipes it into the ```rename``` function changing column names (new name on the left old name on the right) and finally puts it back into the ```wedd``` object. Effectively replacing the old object with the new one with renamed columns. Note that we use back ticks ` around the old column names as otherwise R will give an error - they are that bad!
+
+You can also use function ```clean_names``` from the ```janitor``` package if you have lot's of columns in strange formats. We have commented it out for now as it stop our code below from working :)
+
+```{r}
+wedd <- wedd %>%
+  rename(dob = `D o b`,
+         age = `how_old_are_you?`)
+```
+
+
+```{r, eval = FALSE}
+#OR 
+#wedd <- clean_names(wedd)
+```
+
+### Filling empty columns
+
+We can click on the ```wedd``` object name in the environment tab again to see if that worked.
+
+Next thing to trouble us is the ```region``` column. Only the region for the first guest in each region is entered. The blank cells in the Excel spreadsheet are represented as NA in R. This is quite common in datasets, rather lazy and also dangerous as if the rows were jumbled we'd not be able to give guests their correct region. Let's sort it now. The ```fill``` function will fill down a column until it hits new data. You'll see that in action with this code... Note: Only use this if you are absolutely sure the rows are in the right order! 
+
+
+```{r}
+wedd <- wedd %>% 
+  fill(region)
+```
+
+We won't mention it again but do check each time by looking at the ```wedd``` data after you've run the code. Do note also that these chunks of code are only changing the ```wedd``` object in R's memory. The Excel spreadsheet is not being changed. That's important and good. It means we are creating a reproducible audit trail of the changes to the untidy data and not destroying the original data. At the end of this session we'll save the cleaned up tidy data with a new name for future use.
+
+## Adding a prefix
+
+The ```id``` column is the guest's ID. It's currently just a number but we worry about that as we might, mistakenly, treat it as a number when really it's just a label. One way to make it safer is to add one or more letters at the start. Let's add an "FS" to it. We use two functions here: ```mutate``` is the tidyverse way to change a column. We can overwrite existing columns or create new ones from existing ones. We use the ```str_c``` function to add text to text...
+
+```{r}
+wedd <- wedd %>%
+  mutate(id = str_c("FS", id))
+```
+
+This 'mutates' the ```id``` column by taking the existing ```id``` column and putting an "FS" (for food safety) in font of each entry.
+
+## Removing duplicates
+Sometimes datasets contain the same row more than once, either due to technical glitches or human error. We will use the function ```distinct``` to keep only unique rows in the dataset. We will use function ```get_dupes``` and ```nrow``` to check how many rows are duplicated, if any. 
+
+```{r}
+get_dupes(wedd) %>% nrow()
+
+wedd <- wedd %>%
+  distinct()
+```
+
+You can also check specifically for duplicated in IDs. Depending on the type of data, it may be ok to have the same person appearing more than once, e.g. multiple sampling points, but it's important to know how to check.
+
+If you do find duplicated, you can use the function **distinct** to remove them. Note that this time you need to use the argument **.keep_all** otherwise R will drop all other columns. 
+
+```{r}
+get_dupes(wedd, id) %>% nrow()
+
+wedd <- wedd %>%
+  distinct(id, .keep_all = TRUE)
+```
+
+
+## Separating a column
+
+Now let's have a look at the ```name_gender``` column. Let's check what the first few entries look like. The column name suggests trouble!
+
+```{r}
+wedd %>%
+  select(name_gender) %>%
+  slice(1:10)
+```
+
+
+This appears to hold both the name and the gender of the people. This isn't tidy - each variable should have its own column. We can use the ```separate``` function to split the column. This function needs lots of arguments - the column to split, names for the new columns and what to split on (the separator). Here it is in action (we'll show a section of the data before and after for you)...
+
+Before:
+
+```{r, echo = FALSE, comment = ""}
+wedd %>% select(2:4) %>% slice(1:5) %>% knitr::kable() 
+```
+
+
+```{r}
+wedd <- wedd %>%
+  separate(col = name_gender, into = c("name", "gender"), sep = "_")
+```
+
+```{r, echo = FALSE, comment = ""}
+wedd %>% select(2:5) %>% slice(1:5) %>% knitr::kable()
+```
+
+## Sorting out categories
+
+In the ```gender``` column we have several labels for the same gender. We'd spot this either by eye or when we came to tabulate the data. Let's confirm it here. Since it's categorical, we will just make a quick table of gender. Note that we don't write ```wedd <- ...``` here as we don't want to overwrite the ```wedd``` object. Just to print a count summary to the console so we simply pipe ```wedd``` into the ```count``` function.
+
+```{r}
+wedd %>%
+  count(gender)
+```
+
+We can see that we have "F" and "Female" and "M" and "Male". There's lots of ways to convert these to two categories but here we'll use a function from the tidyverse ```forcats``` package that's designed to manage factors - the R word for categorical data. We use the ```fct_recode``` function giving it the column name and then pairs with the new value on the left and the old value on the right. As we are changing a column's contents we need to put the code inside a ```mutate``` function...
+
+```{r}
+wedd <- wedd %>% 
+  mutate(gender = fct_recode(gender,
+                          "Female" = "F",
+                          "Male" = "M"))
+```
+
+We pressed our 'enter' key after the commas there to make the code a bit neater. Long lines can be hard to read and it's good style to spread long functions over several lines. RStudio will automatically indent code to keep it looking nice and lined up.
+
+Let's check it worked...
+
+```{r}
+wedd %>%
+  count(gender)
+```
+
+## Check numerical variables
+
+Data tidying and cleaning can be hard work. Often you'll spend more time tidying data than analysing it. Especially with data you haven't prepared yourself. But it's a worthwhile investment - tidy data is much easier to plot, analyse and explore than messy data.
+
+Let's have a look at the age column. Since it's numerical, the first thing to do is plot a histogram.
+
+```{r, fig.height=3, fig.width=3}
+ggplot(wedd) +
+  geom_histogram(aes(x = age))
+```
+
+Hmm.. there seems to be a strange value around -1000. We can use the *filter* function to check what the actual value is. 
+
+```{r}
+wedd %>%
+  filter(age < 0) %>%
+  select(id, age)
+```
+
+There seem to be three entries of "-999". This doesn't make sense as an age. What investigate this and find out that this is the researcher's code for missing data. We need to turn these values into R's missing data code - NA. That way we can ignore them where appropriate. Otherwise the "-999"s will mess up our averages and plots. We're changing data in a column so we use ```mutate```. This time we include the ```na_if``` function. Given a column name and a value it will replace the entries with that value with NA.
+
+```{r}
+wedd <- wedd %>% 
+  mutate(age = na_if(age, -999))
+```
+
+Let's check it worked.
+
+```{r, fig.height=3, fig.width=3, warning=FALSE}
+ggplot(wedd) +
+  geom_histogram(aes(x = age))
+```
+
+Don't worry when you try this plot if you get a warning about missing values - that's because there should be some in the ```age``` column now!
+
+### Sorting
+
+We can sort a dataset on one or more columns using the ```arrange``` function. So to sort the ```wedd``` dataset on the age of guest we'd use...
+
+```{r}
+wedd %>% 
+  arrange(age)
+```
+
+Have a look at the data to see if it worked.
+
+To sort on descending age use...
+
+```{r}
+wedd_sorted <- wedd %>% 
+  arrange(desc(age))
+```
+
+I've put the sorted dataset into a new object (```wedd_sorted```) as I don't want to mess with my original!
+
+You can also sort alphabetically or by date. Try sorting by ```name``` and by ```dob```
+
+
+### Filtering
+
+Sometimes we want to exclude rows. Perhaps we want to make a dataset that only includes old male guests. We can use the ```filter``` function to do this...
+
+```{r}
+wedd_male_60 <- wedd %>% 
+  filter(age >= 60 & gender == "Male")
+```
+
+We're taking the ```wedd``` data and piping it into the ```filter``` function. The result gets put into a new object called ```wedd_old_male``` - I don't want to overwrite the full dataset. You give filter a set of conditions - in this case older or equal to 60 and male. If you want to be really clever you can use R's logical operators (techy stuff). See the [filtering](http://r4ds.had.co.nz/transform.html#filter-rows-with-filter) section of R 4 Data science for lots of information on this - this is very optional! 
+
+
+### Checking for errors using multiple columns
+We have data on both date of birth and age so we can check if there are any typos in ages, by calculating the age. The dataset was collected on the 27th October 2017. We will use function ```ymd``` to create date objects and function ```interval``` to calculate the interval between their dob and the date of the questionnaire. We will then divide that by years to get their age! We will save the output into a new column called ```age_cal```. All these handy functions come from the `lubridate` package. Check it out if you want to learn more about how to manipulate date data in R.
+
+```{r}
+wedd <- wedd %>%
+  mutate(age_calc = interval(ymd(dob), ymd("2017/10/27")) %/% years(1))
+
+```
+
+A quick way to check for any obvious mistakes is by plotting the two new columns
+
+```{r, fig.height=3, fig.width=3, warning=FALSE}
+ggplot(wedd) +
+  geom_point(aes(x = age_calc, y = age))
+```
+
+
+Hmmmm there is an age of around 75 that has been entered as ~25. Let's find which ID it is and correct it.
+
+```{r}
+wedd %>%
+  filter(age_calc-age >2) %>%
+  select(id, age, age_calc)
+```
+So id FS182, had the age swapped from 74 to 24! This looks like a typo! It's tempting to go back to Excel and make the change but there's no record of that so it's not best practice. Much better is to import the data as-is and then write lines of R code to edit the data. Let's do that! 
+
+We're changing a column so we use ```mutate``` and we also use the ```case_when``` function of the tidyverse. It lets us set a condition, in this case the guest ID being "FS182" and return a different value for a column in that instance. Here's how...
+
+```{r}
+wedd <- wedd %>%
+  mutate(age = case_when(id == "FS182" ~ 74,
+                         TRUE ~ age))
+```
+
+We're overwriting age with the output of the ```case_when``` function. If the test ```id == "FS182"``` is TRUE it will give us 74 otherwise it gives us what's in ```age``` anyway. The code is a bit complex but if you need to make changes in your data you just modify the column names and the condition test. Ask if you need to do this with your data and we can show you the way!
+
+Let's check it worked! 
+ 
+```{r}
+wedd %>%
+  filter(id == "FS182") %>%
+  select(id:age) %>% 
+  knitr::kable()
+```
+
+## Pivot data from wide to long
+
+Data can be presented in a wide or long format.
+
+Wide data: Each row in a wide dataset contains all the data for a single observation. The values in the ID column do not repeat. The wedding dataset is in a wide data format. 
+
+Long data: Each ID in long data can have multiple rows. You may need this if you want to perform analysis or visualisation with tools that expect long-format data. For example ggplot2 or dplyr.
+
+We will use the function ```pivot_longer``` to pivot our dataset from wide to long. We want to do this to calculate and plot percentages of people who consumed each different food. We will tell R that the columns we want to collate are all the columns referring to food types and we want that information to go to new column ```Food_type```, while the values of each column should go to column ```Consumed```. 
+
+```{r}
+wedd_long <- wedd %>%
+  filter(ate_dinner == "yes") %>%
+  pivot_longer(cols = ate_pate:ate_tiramisu, names_to = "Food_type", values_to = "Consumed")
+```
+
+Let's see... 
+
+```{r}
+wedd_long %>%
+  select(id, age, Food_type, Consumed) %>%
+  slice(1:12)
+```
+
+As you see in the long format of our data, each id appears as many times as there are different types of food. 
+Let's calculate the percentage of people who consumed each food. We will count how many people consumed each food, then we will group the data by food type, to be able to calculate percentages for each food type. Lastly, we will round the Percentages so that they look good on the table!
+
+```{r}
+wedd_long %>%
+  count(Food_type, Consumed) %>%
+  group_by(Food_type) %>%
+  mutate(Percentage = n / sum(n) * 100) %>%
+  mutate(Percentage = round(Percentage))
+```
+
+Now let's plot this! We will pipe the result straight into ggplot, use the ```geom_col``` function to make a bar chart and use the ```coord_flip()``` function to make it horizontal to make it easier to read! 
+
+```{r, fig.height=3, fig.width=5, warning=FALSE}
+wedd_long %>%
+  count(Food_type, Consumed) %>%
+  group_by(Food_type) %>%
+  mutate(Percentage = n / sum(n) * 100) %>%
+  filter(Consumed == "yes") %>%
+  ggplot() +
+  geom_col(aes(x = Food_type, y = Percentage)) +
+  coord_flip()
+```
+
+
+## Saving your tidy data
+
+Last job!
+
+After all this work we'd like to save a tidy and clean version of the data. We can save it in several formats but comma-separated-values make sense (csv). csv files are simple, can be read by R, Excel and lots of other programs and are also human-readable - if you open one in a simple text editor you can see what it contains. To save the tidied up ```wedd``` data we can use the ```write_csv``` function. It's part of the tidyverse set of functions and better than R's built in csv writing function. You simply give it the name of the R data frame you want to save and where to save it...
+
+First create a new folder called ```data_clean``` where you can store any new, clean and tidy versions of your dataset.. 
+
+```{r, echo = TRUE, eval=FALSE}
+write_csv(wedd, here("data_clean", "weddingdata_todaysdate_tidy.csv"))
+```
+
+If you prefer .xlxs here is the code, although we recommend using a csv file lilke in the previous command! (CSV = comma separated values, the advantage of a csv file is that it is a plain text file and can be read by any computer program!)
+
+```{r, echo = TRUE, eval=FALSE}
+write_xlsx(wedd, here("data_clean", "weddingdata_todaysdate_tidy.xlsx"))
+```
+
+You should see two new files in your ```data_clean``` folder.
+
+To import this data if you wanted to work on it without having to run all the cleaning code you can read it in using the import tools in the environment tab (top right-ish of RStudio). You'd choose 'import dataset' then 'From text (readr)'. Alternatively the following code would read in the file and put it into an object called ```tidied_wedd```...
+
+```{r, eval = FALSE}
+tidied_wedd <- read_csv(here("data_clean", "weddingdata_todaysdate_tidy.csv"))
+```
+
+OR.. 
+
+```{r, eval = FALSE}
+tidied_wedd <- read_excel(here("data_clean", "weddingdata_todaysdate_tidy.xlsx"))
+```
+
+That's it. For way more information on tidying data (and more) have a look at R for Data Science by Hadley Wickham and Garrett Grolemund. It's very well written and it has a lot of information!
+
+
+## Exercises
+
+### Ex 1. 
+Make a dataset that contains only female guests who ate pate. 
+
+### Ex 2. 
+Correct the weight of guest with ID FS135 to 65.55 kg. 
+
+### Ex 3. 
+Round up the weight column to 1 decimal place and save results in a new column called weight_round.
+
+### Ex 4. 
+Change the name of the variable noro to norovirus.
+
+### Ex 5. 
+Recode the gender column to female and male.
+
+For future reference: A lot of the pain of having to tidy data in R can be avoided if you start by recording your data in a well organised format. If you are lucky enough to be the person designing the data entry sheet  you can control this. If you have someone else's data you just need to go ahead and sort it in R (don't try and tidy it in Excel!).
+For a great reference on how to store data in Excel read Data Organisation in Spreadsheets by Broman and Woo.
+
+
+
